@@ -32,51 +32,61 @@ var steps = [];
 }
 
 function sortArray() {
-var inputArray = document.getElementById("inputArray").value;
-var arr = inputArray.split(",").map(Number);
-
+    var inputArray = document.getElementById("inputArray").value;
+    var arr = inputArray.split(",").map(Number);
+  
     if (arr.length < 5 || arr.length > 11) {
-        alert("Please enter a minimum of 5 inputs and a maximum of 11 inputs.");
-        return;
+      alert("Please enter a minimum of 5 inputs and a maximum of 11 inputs.");
+      return;
     }
-
+  
     var steps = bubbleSort(arr);
-
+  
     var output = "";
     for (var i = 0; i < steps.length; i++) {
-        output += "<strong>Pass " + (i + 1) + ":</strong><br>";
-        for (var j = 0; j < steps[i].length; j++) {
-        output += formatStep(steps[i][j], j === steps[i].length - 1);
-        }
-        output += "<br>";
+      output += "<strong>Pass " + (i + 1) + ":</strong><br>";
+      if (i === 0) {
+        output += formatStep(steps[i][0], false);
+      }
+      for (var j = 1; j < steps[i].length - 1; j++) {
+        output += formatStep(steps[i][j], false);
+      }
+      output += formatStep(steps[i][steps[i].length - 1], i === steps.length - 1);
+      output += "<br>";
     }
-
-var sortedOutput = formatSortedArray(steps[steps.length - 1][steps[steps.length - 1].length - 1].step);
-document.getElementById("outputSteps").innerHTML = output;
-document.getElementById("outputSorted").innerHTML = sortedOutput;
+  
+    var sortedOutput = formatSortedArray(steps[steps.length - 1][steps[steps.length - 1].length - 1].step);
+    document.getElementById("outputSteps").innerHTML = output;
+    document.getElementById("outputSorted").innerHTML = sortedOutput;
 }
+  
 
 function formatStep(step, isLastStep) {
-var output = "[";
+    var output = "";
 
     for (var i = 0; i < step.step.length; i++) {
         var num = step.step[i];
-        var hasAsterisks = step.comparedIndices.length === 2 && step.comparedIndices.includes(i);
+        var shouldHighlight = step.comparedIndices.length === 2 && (i === step.comparedIndices[0] || i === step.comparedIndices[0] + 1);
 
         if (i !== 0) {
-        output += ", ";
+            output += ", ";
         }
 
-        if (hasAsterisks) {
-        output += "<span class='highlight'>" + num + "</span>";
-        } else {
         output += num;
+    }
+
+    if (shouldHighlight) {
+        if (isLastStep) {
+            output += "  (swapped)";
+        } else {
+            output += "  (comparing)";
         }
     }
 
-output += "]<br>";
-return output;
+    output += "<br>";
+    return output;
 }
+
 
 function formatSortedArray(arr) {
 var output = "<strong>Sorted Array:</strong><br>";
@@ -86,9 +96,6 @@ output += "<span class='sorted'>[";
         output += ", ";
         }
         output += arr[i];
-        if (i !== arr.length - 1) {
-        output += "*";
-        }
     }
 output += "]</span>";
 return output;
