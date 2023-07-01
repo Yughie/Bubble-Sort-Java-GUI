@@ -1,38 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bubble Sort</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <script src="bubblesort.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Sort</title>
+  <link rel="icon" type="tab-icon" href="bubble.png">
+  <link rel="stylesheet" href="bubbelsortstyle.css">
+  <script src="bubblesortscript.js"></script>
+</head>
+<body>
+  <div class="start">
     <h1>Bubble Sort</h1>
-    <label for="inputArray">Input Array (comma-separated):</label>
-    <input type="text" id="inputArray" />
-    <button onclick="sortArray()">Sort</button>
-    <br />
-    <br />
-    <label for="outputSteps">Sorting Steps:</label>
-    <p id="outputSteps"></p>
-    <br />
-    <label for="outputSorted">Sorted Array:</label>
-    <p id="outputSorted"></p>
-    <script src="script.js"></script>
+    <form>
+      <label for="numbers">Enter numbers (comma-separated):</label>
+      <input type="text" id="numbers" name="numbers">
+    </form>
+    <button type="button" onclick="initialize()" class="btn">Sort</button>
+  </div>
+  <div id="output"></div>
 
-    <style>
-      .highlight {
-        background-color: #dfc4ff;
-      }
-      .highlight-swapped {
-        background-color: #cef1f5;
-      }
-      .sorted {
-        border: 1px solid pink;
-        padding: 5px;
-        display: inline-block;
-      }
-    </style>
-  </body>
+  <div class="nav-btns">
+    <button type="button" onclick="previousPass()" class="btn">Back</button>
+    <button type="button" onclick="nextPass()" class="btn">Next</button>
+  </div>
+</body>
 </html>

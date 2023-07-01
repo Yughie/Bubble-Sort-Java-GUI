@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;450;500;550;600;700;800;900&display=swap');
+@font-face { font-family: pixellari; src: url('Pixellari.ttf'); } 
+@font-face { font-family: pixelsixLowerC; src: url('pixelsixLowerC.ttf'); } 
+@font-face { font-family: pixelsixUpperC; src: url('pixelsixUpperC.ttf'); } 
+
+
+* {
+    font-family: pixelsixLowerC;
+    font-weight: 450;
+    font-size: 25px;
+}
+
+body {
+    margin: 0px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background-image: url('wao.webp');
+    background-color: black;
+    background-size: cover;
+    color: white;
+    overflow-x: hidden;
+}
+
+.start {
+    text-align: center;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-family: pixelsixUpperC;
+    font-size: 50px;
+    margin: 5px 0px;
+    color:#EBEF00;
+    text-shadow: 5px 1.41px rgba(84,84,232,1),
+             2px 0 rgba(84,84,232,1),
+             1.41px -1.41px rgba(84,84,232,1),
+             0 -2px rgba(84,84,232,1),
+             -1.41px -1.41px rgba(84,84,232,1),
+             -2px 0 rgba(84,84,232,1),
+             -1.41px 1.41px rgba(84,84,232,1),
+             0 2px rgba(84,84,232,1);
+}
+
+p {
+    color:#EBEF00;
+    font-family: pixelsixUpperC;
+    font-size: 30px;
+    margin: 3px 0px;
+}
+
+.resultNum {
+    font-size: 30px;
+    color:#04FF00;
+}
+
+.comparisonNum {
+    color:#EBEF00;
+}
+
+#output {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+    width: 700px;
+}
+
+.numbersContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.number {
+    display: inline-block;
+    margin: 5px;
+    background-image: url('bubble.png');
+    background-size: cover;
+    border-radius: 50px;
+    padding: 20px;
+    width: 32px;
+    text-align: center;
+}
+
+.btn {
+    border-radius: 5px;
+    border: none;
+    width: 75px;
+    height: 40px;
+    text-align: center;
+    background-color: #E5408D;
+    color: white;
+    transition: .2s ease-in-out;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #5454E8;
+}
+
+.nav-btns {
+    padding-bottom: 30px;
+}
+
+#comparison, #comparison2 {
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    color:#fbff00;
+}
+
+#comparison {
+    animation-name: floatUpDown1;
+    animation-duration: 2s;
+}
+
+#comparison2 {
+    animation-name: floatUpDown2;
+    animation-duration: 2s;
+}
+
+/* Numbers on comparison animation */
+@keyframes floatUpDown1 {
+    0%, 100% {
+        transform: translateY(2px);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes floatUpDown2 {
+    0%, 100% {
+        transform: translateY(-2px);
+    }
+    50% {
+        transform: translateY(2px);
+    }
+}
+
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #1E1E1C;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #EBEF00;
+}
