@@ -3,44 +3,65 @@
 <head>
   <title>Bubble Sort</title>
   <script>
-    function bubbleSort() {
-      var input = document.getElementById('numbers').value;
-      var numbers = input.split(',').map(Number);
-      var output = document.getElementById('output');
+    var numbers = [];
+    var currentPass = 0;
 
+    function initialize() {
+      var input = document.getElementById('numbers').value;
+      numbers = input.split(',').map(Number);
+      currentPass = 0;
+      displayCurrentPass();
+    }
+
+    function displayCurrentPass() {
+      var output = document.getElementById('output');
       output.innerHTML = ''; // Clear previous output
 
-      for (var i = 0; i < numbers.length - 1; i++) {
-        var passOutput = document.createElement('p');
-        passOutput.innerText = 'Pass ' + (i + 1) + ':';
-        output.appendChild(passOutput);
+      var passOutput = document.createElement('p');
+      passOutput.innerText = 'Pass ' + (currentPass + 1) + ':';
+      output.appendChild(passOutput);
 
-        for (var j = 0; j < numbers.length - i - 1; j++) {
-          var comparison = document.createElement('span');
-          comparison.innerText = numbers.join(', ') + ' - Comparing ' + numbers[j] + ' and ' + numbers[j + 1];
+      for (var j = 0; j < numbers.length - currentPass - 1; j++) {
+        var comparison = document.createElement('span');
+        comparison.innerText = numbers.join(', ') + ' - Comparing ' + numbers[j] + ' and ' + numbers[j + 1];
 
-          if (numbers[j] > numbers[j + 1]) {
-            var temp = numbers[j];
-            numbers[j] = numbers[j + 1];
-            numbers[j + 1] = temp;
-            comparison.innerText += ' - ' + numbers[j] + ' is lesser than ' + numbers[j + 1] + ', swap';
-          } else {
-            comparison.innerText += ' - ' + numbers[j + 1] + ' is greater than or equal to ' + numbers[j] + ', retain';
-          }
-
-          output.appendChild(comparison);
-          output.appendChild(document.createElement('br'));
+        if (numbers[j] > numbers[j + 1]) {
+          var temp = numbers[j];
+          numbers[j] = numbers[j + 1];
+          numbers[j + 1] = temp;
+          comparison.innerText += ' - ' + numbers[j + 1] + ' is lesser than ' + numbers[j] + ', swap';
+        } else {
+          comparison.innerText += ' - ' + numbers[j + 1] + ' is greater than or equal to ' + numbers[j] + ', retain';
         }
 
-        var passResult = document.createElement('p');
-        passResult.innerText = 'Pass ' + (i + 1) + ' result: ' + numbers.join(', ');
-        output.appendChild(passResult);
+        output.appendChild(comparison);
         output.appendChild(document.createElement('br'));
       }
 
-      var finalResult = document.createElement('p');
-      finalResult.innerText = 'Since no swaps were made during Pass ' + (numbers.length - 1) + ', the list is now sorted. The final sorted array is: ' + numbers.join(', ');
-      output.appendChild(finalResult);
+      var passResult = document.createElement('p');
+      passResult.innerText = 'Pass ' + (currentPass + 1) + ' result: ' + numbers.join(', ');
+      output.appendChild(passResult);
+      output.appendChild(document.createElement('br'));
+
+      if (currentPass === numbers.length - 2) {
+        var finalResult = document.createElement('p');
+        finalResult.innerText = 'Since no swaps were made during Pass ' + (numbers.length - 1) + ', the list is now sorted. The final sorted array is: ' + numbers.join(', ');
+        output.appendChild(finalResult);
+      }
+    }
+
+    function nextPass() {
+      if (currentPass < numbers.length - 2) {
+        currentPass++;
+        displayCurrentPass();
+      }
+    }
+
+    function previousPass() {
+      if (currentPass > 0) {
+        currentPass--;
+        displayCurrentPass();
+      }
     }
   </script>
 </head>
@@ -49,7 +70,9 @@
   <form>
     <label for="numbers">Enter numbers (comma-separated):</label>
     <input type="text" id="numbers" name="numbers">
-    <button type="button" onclick="bubbleSort()">Sort</button>
+    <button type="button" onclick="initialize()">Sort</button>
+    <button type="button" onclick="previousPass()">Back</button>
+    <button type="button" onclick="nextPass()">Next</button>
   </form>
   <div id="output"></div>
 </body>
