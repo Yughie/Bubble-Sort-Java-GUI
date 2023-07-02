@@ -21,8 +21,28 @@
   <div id="output"></div>
 
   <div class="nav-btns">
-    <button type="button" onclick="previousPass()" class="btn">Back</button>
-    <button type="button" onclick="nextPass()" class="btn">Next</button>
+    <button type="button" onclick="previousPass()" class="btn" id="nxtbtn">Back</button>
+    <button type="button" onclick="nextPass()" class="btn" id="prevbtn">Next</button>
+  </div>
+
+  <div class="less5">
+    Minimum of 5 inputs.
+    <button type="button" onclick="close5Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="greater11">
+    Maximum of 11 inputs only.
+    <button type="button" onclick="close11Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="noInput">
+    No input.
+    <button type="button" onclick="closeNoInput()" class="closebtn">OK</button>
+  </div>
+
+  <div class="invalid">
+    Numbers separated by commas<br>are the only allowed input.
+    <button type="button" onclick="closeInvalidAlert()" class="closebtn">OK</button>
   </div>
 </body>
 </html>
