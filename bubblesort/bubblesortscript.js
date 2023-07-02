@@ -5,7 +5,7 @@ var currentPass = 0; // Current pass index
 function initialize() {
   var input = document.getElementById('numbers').value; // Get input value
 
-  var invalidCharacters = /[^0-9,\s]/g; // check for invalid input (letters)
+  var invalidCharacters = /[^0-9,\s]/g; // check for invalid input (letters and other symbols)
   if (invalidCharacters.test(input)) {
     openInvalidAlert(); // Show invalid input alert
     disablebtns(); // Disable back and next button
@@ -125,7 +125,7 @@ function displayCurrentPass() {
   output.appendChild(passOutput);
 
   // Iterate over the numbers and display the comparison steps
-  for (var j = 0; j < numbers.length - currentPass - 1; j++) {
+  for (var j = 0; j < numbers.length - 1; j++) {
     // Container for Bubble Array and sorting description text
     var numbersContainer = document.createElement('div');
     numbersContainer.classList.add('numbersContainer');
@@ -214,14 +214,14 @@ function displayCurrentPass() {
   output.appendChild(passResult);
   output.appendChild(document.createElement('br'));
 
-  // Display the final sorted array when it's the last pass
+  // Display final sorted array
   if (currentPass === numbers.length - 2) {
     var finalResultContainer = document.createElement('div');
     finalResultContainer.classList.add('finalResultNum');
 
     var finalResultTxt = document.createElement('p');
     finalResultTxt.classList.add('finaltxt');
-    finalResultTxt.innerText = 'Since no swaps were made during Pass ' + (numbers.length - 1) + ', the list is now sorted. The final sorted array is: ';
+    finalResultTxt.innerText = 'The list is now sorted. The final sorted array is: ';
 
     var finalResult = document.createElement('span');
     finalResult.classList.add('finalSorted');
