@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;450;500;550;600;700;800;900&display=swap');
-@font-face { font-family: pixellari; src: url('Pixellari.ttf'); } 
 @font-face { font-family: pixelsixLowerC; src: url('pixelsixLowerC.ttf'); } 
 @font-face { font-family: pixelsixUpperC; src: url('pixelsixUpperC.ttf'); } 
-
 
 * {
     font-family: pixelsixLowerC;
@@ -44,20 +41,58 @@ h1 {
              0 2px rgba(84,84,232,1);
 }
 
-p {
-    color:#EBEF00;
-    font-family: pixelsixUpperC;
-    font-size: 30px;
-    margin: 3px 0px;
+input {
+    border-radius: 5px;
+    border: none;
+    transition: .2s ease-in-out;
 }
 
-.resultNum {
+input[type=text]:focus {
+    outline: none;
+}
+
+.finalResultNum, ul, p{
+    color:#EBEF00;
+    font-size: 30px;
+    padding: 0px;
+}
+
+ul, p{
+    display: flex;
+}
+
+.finaltxt {
+    display: block;
+}
+
+#output p, #output ul {
+    font-family: pixelsixUpperC;
+    font-size: 30px;
+}
+
+.finalResultNum p {
+    font-family: pixelsixUpperC;
+    font-size: 30px;
+}
+
+.passResultNum, .resultNum {
     font-size: 30px;
     color:#04FF00;
+    animation: glow 2.5s linear infinite;
+    list-style: none;
+    padding-left: 15px;
 }
 
 .comparisonNum {
     color:#EBEF00;
+}
+
+.swap {
+    color: #04FF00;
+}
+
+.retain {
+    color: #00ffd5;
 }
 
 #output {
@@ -66,7 +101,7 @@ p {
     justify-content: center;
     flex-direction: column;
     margin: 10px;
-    width: 700px;
+    width: 1200px;
 }
 
 .numbersContainer {
@@ -77,10 +112,9 @@ p {
 
 .number {
     display: inline-block;
-    margin: 5px;
+    margin: 5px 10px;
     background-image: url('bubble.png');
     background-size: cover;
-    border-radius: 50px;
     padding: 20px;
     width: 32px;
     text-align: center;
@@ -92,18 +126,71 @@ p {
     width: 75px;
     height: 40px;
     text-align: center;
-    background-color: #E5408D;
-    color: white;
+    background-color: white;
+    color: #E5408D;
     transition: .2s ease-in-out;
+    margin-top: 20px;
 }
 
 .btn:hover {
     cursor: pointer;
-    background-color: #5454E8;
+    box-shadow: 0 0 5px #ffffff, 
+                0 0 10px #ffffff, 
+                0 0 15px #ffffff, 
+                0 0 20px #E5408D, 
+                0 0 30px #E5408D, 
+                0 0 40px #E5408D, 
+                0 0 55px #E5408D, 
+                0 0 75px #E5408D;
 }
 
 .nav-btns {
     padding-bottom: 30px;
+    display: flex;
+    gap: 35px;
+}
+
+.less5, .greater11, .noInput, .invalid {
+    opacity: 0;
+    display: none;
+    transition: .2s ease-in-out;
+    background-image: url('alertframe.png');
+    background-size: cover;
+    padding: 100px 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.greater11, .invalid {
+    padding: 120px 100px;
+}
+
+.closebtn {
+    position: absolute;
+    bottom: 40px;
+    right: 43%;
+    width: 75px;
+    height: 35px;
+    color: black;
+    background: white;
+    border: none;  
+    border-radius: 5px; 
+    transition: .1s ease;
+}
+
+.closebtn:hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px #FFF, 
+                0 0 10px #FFF, 
+                0 0 15px #FFF, 
+                0 0 20px #49ff18, 
+                0 0 30px #49FF18, 
+                0 0 40px #49FF18, 
+                0 0 55px #49FF18, 
+                0 0 75px #49ff18;
 }
 
 #comparison, #comparison2 {
@@ -113,26 +200,18 @@ p {
 }
 
 #comparison {
-    animation-name: floatUpDown1;
+    animation-name: floatUpDown;
     animation-duration: 2s;
 }
 
 #comparison2 {
-    animation-name: floatUpDown2;
+    animation-name: floatUpDown;
+    animation-delay: .3s;
     animation-duration: 2s;
 }
 
-/* Numbers on comparison animation */
-@keyframes floatUpDown1 {
-    0%, 100% {
-        transform: translateY(2px);
-    }
-    50% {
-        transform: translateY(-2px);
-    }
-}
-
-@keyframes floatUpDown2 {
+/* bubble float animation */
+@keyframes floatUpDown {
     0%, 100% {
         transform: translateY(-2px);
     }
@@ -141,6 +220,41 @@ p {
     }
 }
 
+@keyframes glow {
+  
+  0% {
+    color: #04FF00;
+    text-shadow: none;
+  }
+  
+  20% {
+    color: #04FF00;
+    text-shadow: none;
+  }
+  
+  40% {
+    color: #04FF00;
+    text-shadow: 0 0 10px #04FF00, 0 0 35px #00ff80, 0 0 70px #00ff80;
+  }
+  
+  60% {
+    color: #04FF00;
+    text-shadow: none;
+  }
+  
+  80% {
+    color: #04FF00;
+    text-shadow: none;
+  }
+  
+  100% {
+    color: #04FF00;
+    text-shadow: none;
+  }
+}
+
+
+/* custom scrollbar */
 ::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #1E1E1C;
@@ -152,5 +266,5 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #EBEF00;
+	background-color: #ff0077;
 }
