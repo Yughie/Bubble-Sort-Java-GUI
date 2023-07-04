@@ -7,6 +7,36 @@
     font-size: 25px;
 }
 
+.bubble_description{
+    font-size: 16px;
+    width: 60%;
+    margin: 20px auto;
+
+}
+
+.bubble_note{
+    margin: 10px auto;
+    font-size: 14px;
+}
+.number_label{
+    margin-bottom: 20px;
+}
+.input_number{
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+.initialAppear{
+    /*display: block;
+    opacity: 1;
+*/
+}
+.sortAppear{
+    display: none;
+    opacity: 0;
+    margin: auto;
+}
+
 body {
     margin: 0px;
     box-sizing: border-box;
@@ -29,7 +59,7 @@ h1 {
     text-transform: uppercase;
     font-family: pixelsixUpperC;
     font-size: 50px;
-    margin: 5px 0px;
+    margin: 20px 0px;
     color:#EBEF00;
     text-shadow: 5px 1.41px rgba(84,84,232,1),
              2px 0 rgba(84,84,232,1),
@@ -57,7 +87,7 @@ input[type=text]:focus {
     padding: 0px;
 }
 
-ul, p{
+ul{
     display: flex;
 }
 
@@ -123,13 +153,12 @@ ul, p{
 .btn {
     border-radius: 5px;
     border: none;
-    width: 75px;
-    height: 40px;
     text-align: center;
     background-color: white;
     color: #E5408D;
     transition: .2s ease-in-out;
     margin-top: 20px;
+    padding: 8px;
 }
 
 .btn:hover {

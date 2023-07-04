@@ -4,6 +4,8 @@ var currentPass = 0; // Current pass index
 
 function initialize() {
   var input = document.getElementById('numbers').value; // Get input value
+  var initialAppear = document.querySelectorAll('.intialAppear');
+  var sortAppear = document.querySelectorAll('.sortAppear');
 
   var invalidCharacters = /[^0-9,\s]/g; // check for invalid input (letters and other symbols)
   if (invalidCharacters.test(input)) {
@@ -33,6 +35,13 @@ function initialize() {
     return;
   }
 
+
+  sortAppear.forEach(function(button) {
+    button.style.display = 'block';
+    setTimeout(function() {
+      button.style.opacity = '1';
+    }, 10);
+  });
   enablebtns(); // Enable back and next button
   close5Alert(); // Hide alert for less than 5 numbers
   currentPass = 0; // Reset current pass index
@@ -193,7 +202,7 @@ function displayCurrentPass() {
 
   // Create a list for the pass result (ex. PASS 1 RESULT: 5, 2, 12, 13, 41)
   var passResult = document.createElement('ul');
-  passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: ';
+  passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: '; 
 
   // Add each number as a list item, set glow animation delay per list item
   numbers.forEach(function(number, index) {
@@ -252,7 +261,13 @@ function displayCurrentPass() {
 function nextPass() {
   if (currentPass < numbers.length - 2) {
     currentPass++;
+    displayCurrentPass(); 
+  } else if (currentPass === numbers.length - 2) {
+    currentPass++;
     displayCurrentPass();
+    disablebtns(); // Disable back and next buttons after the final pass
+  } else {
+    disablebtns(); // Disable back and next buttons if already in the final pass
   }
 }
 
@@ -261,6 +276,12 @@ function previousPass() {
   if (currentPass > 0) {
     currentPass--;
     numbers = [...originalNumbers]; // Restore original numbers
-    displayCurrentPass();
-  }
+
+    // Update the displayed passes from 0 to currentPass
+    clearOutput();
+    for (var pass = 0; pass <= currentPass; pass++) {
+      displayCurrentPass(pass);
+    }
 }
+}
+
