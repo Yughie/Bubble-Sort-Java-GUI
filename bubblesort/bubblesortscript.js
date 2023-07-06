@@ -128,6 +128,8 @@ function displayCurrentPass() {
   var output = document.getElementById('output'); // output area for sorting process
   output.innerHTML = ''; // Clear previous output
 
+  var swapsMade;
+
   // Create a paragraph element for the pass (Pass 1, Pass 2, etc.)
   var passOutput = document.createElement('p');
   passOutput.innerText = 'Pass ' + (currentPass + 1) + ':';
@@ -135,6 +137,9 @@ function displayCurrentPass() {
 
   // Iterate over the numbers and display the comparison steps
   for (var j = 0; j < numbers.length - 1; j++) {
+
+    swapsMade = false;
+
     // Container for Bubble Array and sorting description text
     var numbersContainer = document.createElement('div');
     numbersContainer.classList.add('numbersContainer');
