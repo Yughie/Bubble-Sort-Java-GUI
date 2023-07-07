@@ -178,6 +178,11 @@ function displayCurrentPass() {
       numbers[j + 1] = temp; // Replace the next number (5) with the stored current number (12)
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j+1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
       
+      // Display the element in its final position
+      if (j === numbers.length - 2) {
+        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
+      }
+      
     /* ex. sorted 
       (12 5) 2 41 13
       5 (12 2) 41 13
@@ -185,11 +190,21 @@ function displayCurrentPass() {
       If the current number (12) is less than the next number (41), retain them in the same order */
     } else if (numbers[j] < numbers[j + 1]) {
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j+1] + '</span>, <span class="retain">retain</span>';
-    
-      /* ex. (5 5) 12 2 41 13
+      
+      // Display the element in its final position
+      if (j === numbers.length - 2) {
+        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
+      }
+      
+    /* ex. (5 5) 12 2 41 13
       If the current number (5) is equal to the next number (5), retain them in the same order */
     } else {                                                              
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is equal to <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
+      
+      // Display the element in its final position
+      if (j === numbers.length - 2) {
+        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
+      }
     }
 
 
@@ -284,4 +299,3 @@ function previousPass() {
     }
 }
 }
-
