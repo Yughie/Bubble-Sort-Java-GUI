@@ -264,16 +264,14 @@ function displayCurrentPass() {
 
 // next button
 function nextPass() {
-  if (currentPass < numbers.length - 2) {
+  if (currentPass < numbers.length -2) {
     currentPass++;
     displayCurrentPass(); 
   } else if (currentPass === numbers.length - 2) {
     currentPass++;
     displayCurrentPass();
     disablebtns(); // Disable back and next buttons after the final pass
-  } else {
-    disablebtns(); // Disable back and next buttons if already in the final pass
-  }
+  } 
 }
 
 // back button 
@@ -289,4 +287,3 @@ function previousPass() {
     }
 }
 }
-
