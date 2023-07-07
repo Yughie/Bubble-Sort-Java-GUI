@@ -2,12 +2,11 @@ var numbers = []; // Array to store input numbers
 var originalNumbers = []; // Copy of the original input numbers for back and next pass view
 var currentPass = 0; // Current pass index
 
-
-
 function initialize() {
   var input = document.getElementById('numbers').value; // Get input value
   var initialAppear = document.querySelectorAll('.intialAppear');
   var sortAppear = document.querySelectorAll('.sortAppear');
+  document.getElementById('prevbtn').disabled = true;
 
   var invalidCharacters = /[^0-9,\s]/g; // check for invalid input (letters and other symbols)
   if (invalidCharacters.test(input)) {
@@ -127,93 +126,52 @@ function closeInvalidAlert() {
 
 // Displaying sorting process
 function displayCurrentPass() {
-  var output = document.getElementById('output'); // output area for sorting process
-  output.innerHTML = ''; // Clear previous output
+  var output = document.getElementById('output');
+  output.innerHTML = '';
 
-  var swapsMade;
-
-  // Create a paragraph element for the pass (Pass 1, Pass 2, etc.)
   var passOutput = document.createElement('p');
   passOutput.innerText = 'Pass ' + (currentPass + 1) + ':';
   output.appendChild(passOutput);
 
-  // Iterate over the numbers and display the comparison steps
-  for (var j = 0; j < numbers.length - 1; j++) {
+  var swapsMade = false; // Flag to track if any swaps were made during the pass
 
- 
-
-    // Container for Bubble Array and sorting description text
+  for (var j = 0; j < numbers.length - 1 - currentPass; j++) {
     var numbersContainer = document.createElement('div');
     numbersContainer.classList.add('numbersContainer');
 
-    // Wrapper for Bubble Array
     var numbersWrapper = document.createElement('div');
     numbersWrapper.classList.add('numbersWrapper');
 
-    // Comparison of 2 numbers in the array for Bubble Sorting
     for (var k = 0; k < numbers.length; k++) {
-      // Container for Bubble Number
       var number = document.createElement('div');
       number.classList.add('number');
 
-      // Bubble Number 1
       if (k === j) {
-        // Set Bubble Number 1 ID
         number.id = 'comparison';
       }
-      
-      // Bubble Number 2
+
       if (k === j + 1) {
-        // Set Bubble Number 2 ID
         number.id = 'comparison2';
       }
       number.innerText = numbers[k];
       numbersWrapper.appendChild(number);
     }
 
-    // Wrapper for sorting description text
     var comparison = document.createElement('div');
     comparison.classList.add('comparisontxt');
     comparison.innerText = '';
 
-    // Conditioning for sorting description text
-    // ex. (12 5) 2 41 13
-    // If the current number (12) is greater than the next number (5), swap them
     if (numbers[j] > numbers[j + 1]) {
-      var temp = numbers[j]; // Store the current number (12) in a temporary variable
-      numbers[j] = numbers[j + 1]; // Replace the current number (12) with the next number (5)
-      numbers[j + 1] = temp; // Replace the next number (5) with the stored current number (12)
-      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j+1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
-      
-      // Display the element in its final position
-      if (j === numbers.length - 2) {
-        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
-      }
-      
-    /* ex. sorted 
-      (12 5) 2 41 13
-      5 (12 2) 41 13
-      5 2 (12 41) 13
-      If the current number (12) is less than the next number (41), retain them in the same order */
+      var temp = numbers[j];
+      numbers[j] = numbers[j + 1];
+      numbers[j + 1] = temp;
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j + 1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
+      swapsMade = true; // Set swapsMade flag to true if a swap is made
     } else if (numbers[j] < numbers[j + 1]) {
-      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j+1] + '</span>, <span class="retain">retain</span>';
-      
-      // Display the element in its final position
-      if (j === numbers.length - 2) {
-        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
-      }
-      
-    /* ex. (5 5) 12 2 41 13
-      If the current number (5) is equal to the next number (5), retain them in the same order */
-    } else {                                                              
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
+    } else {
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is equal to <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
-      
-      // Display the element in its final position
-      if (j === numbers.length - 2) {
-        output.innerHTML += '<p>Done this pass. The last element processed is now in its final position: ' + numbers[j+1] + '</p>';
-      }
     }
-
 
     numbersContainer.appendChild(numbersWrapper);
     numbersContainer.appendChild(comparison);
@@ -222,31 +180,12 @@ function displayCurrentPass() {
     output.appendChild(document.createElement('br'));
   }
 
-  // Create a list for the pass result (ex. PASS 1 RESULT: 5, 2, 12, 13, 41)
-  var passResult = document.createElement('ul');
-  passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: '; 
+  currentPass++;
 
-  // Add each number as a list item, set glow animation delay per list item
-  numbers.forEach(function(number, index) {
-    var li = document.createElement('li');
-    li.classList.add('passResultNum');
-    li.textContent = number;
-
-    var animationDelay = (index + 1) * 0.2; // Increment delay by 0.2 seconds for each index
-    li.style.animationDelay = animationDelay + 's';
-
-    passResult.appendChild(li);
-
-    if (index !== numbers.length - 1) {
-      passResult.appendChild(document.createTextNode(', '));
-    }
-  });
-
-  output.appendChild(passResult);
-  output.appendChild(document.createElement('br'));
-
-  // Display final sorted array
-  if (currentPass === numbers.length - 2) {
+  if (swapsMade && currentPass < numbers.length - 1) {
+    // Enable the next button to proceed to the next pass
+    document.getElementById('nxtbtn').disabled = false;
+  } else {
     var finalResultContainer = document.createElement('div');
     finalResultContainer.classList.add('finalResultNum');
 
@@ -256,51 +195,116 @@ function displayCurrentPass() {
 
     var finalResult = document.createElement('span');
     finalResult.classList.add('finalSorted');
-
-    // Add each number as a span inside the final result element, set glow animation delay per span
-    numbers.forEach(function(number, index) {
-      var spanItem = document.createElement('span');
-      spanItem.classList.add('resultNum');
-      spanItem.textContent = number;
-
-      var animationDelay = (index + 1) * 0.2; // Increment delay by 0.2 seconds for each index
-      spanItem.style.animationDelay = animationDelay + 's';
-
-      finalResultTxt.appendChild(spanItem);
-
-      if (index !== numbers.length - 1) {
-        finalResultTxt.appendChild(document.createTextNode(', '));
-      }
-    });
+    finalResult.innerText = numbers.join(', ');
 
     finalResultContainer.appendChild(finalResultTxt);
     finalResultContainer.appendChild(finalResult);
     output.appendChild(finalResultContainer);
+
+    // Disable the next button when sorting is completed
+    document.getElementById('nxtbtn').disabled = true;
   }
-}
+  }
+
 
 // next button
 function nextPass() {
-  if (currentPass < numbers.length -2) {
-    currentPass++;
-    displayCurrentPass(); 
-  } else if (currentPass === numbers.length - 2) {
-    currentPass++;
+  if (currentPass < numbers.length - 1) {
     displayCurrentPass();
-    disablebtns(); // Disable back and next buttons after the final pass
-  } 
+  }
 }
 
 // back button 
 function previousPass() {
   if (currentPass > 0) {
     currentPass--;
-    numbers = [...originalNumbers]; // Restore original numbers
+    displayPass(currentPass); // Display the previous pass
+  }
 
-    // Update the displayed passes from 0 to currentPass
-    clearOutput();
-    for (var pass = 0; pass <= currentPass; pass++) {
-      displayCurrentPass(pass);
+  // Enable the next button if we are not on the last pass
+  if (currentPass < numbers.length - 1) {
+    document.getElementById('nxtbtn').disabled = false;
+  }
+
+  // Enable the previous button if we are not on the first pass
+  if (currentPass > 0) {
+    document.getElementById('prevbtn').disabled = false;
+  } else {
+    // Disable the previous button when on the first pass
+    document.getElementById('prevbtn').disabled = true;
+  }
+}
+
+function displayPass(pass) {
+  var output = document.getElementById('output');
+  output.innerHTML = '';
+
+  var passOutput = document.createElement('p');
+  passOutput.innerText = 'Pass ' + (pass + 1) + ':';
+  output.appendChild(passOutput);
+
+  var swapsMade = false;
+
+  for (var j = 0; j < numbers.length - 1 - pass; j++) {
+    var numbersContainer = document.createElement('div');
+    numbersContainer.classList.add('numbersContainer');
+
+    var numbersWrapper = document.createElement('div');
+    numbersWrapper.classList.add('numbersWrapper');
+
+    for (var k = 0; k < numbers.length; k++) {
+      var number = document.createElement('div');
+      number.classList.add('number');
+
+      if (k === j) {
+        number.id = 'comparison';
+      }
+
+      if (k === j + 1) {
+        number.id = 'comparison2';
+      }
+      number.innerText = numbers[k];
+      numbersWrapper.appendChild(number);
     }
+
+    var comparison = document.createElement('div');
+    comparison.classList.add('comparisontxt');
+    comparison.innerText = '';
+
+    if (numbers[j] > numbers[j + 1]) {
+      var temp = numbers[j];
+      numbers[j] = numbers[j + 1];
+      numbers[j + 1] = temp;
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j + 1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
+      swapsMade = true; // Set swapsMade flag to true if a swap is made
+    } else if (numbers[j] < numbers[j + 1]) {
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
+    } else {
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is equal to <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
+    }
+
+    numbersContainer.appendChild(numbersWrapper);
+    numbersContainer.appendChild(comparison);
+
+    output.appendChild(numbersContainer);
+    output.appendChild(document.createElement('br'));
+  }
+
+  if (swapsMade && pass < numbers.length - 1) {
+    // Enable the next button to proceed to the next pass
+    document.getElementById('nxtbtn').disabled = false;
+  } else {
+    // Disable the next button when sorting is completed
+    document.getElementById('nxtbtn').disabled = true;
+  }
+
+  // Enable the previous button if we are not on the first pass
+  if (pass > 0) {
+    document.getElementById('prevbtn').disabled = false;
+  } else {
+    // Disable the previous button when on the first pass
+    document.getElementById('prevbtn').disabled = true;
+  }
 }
-}
+
+  
