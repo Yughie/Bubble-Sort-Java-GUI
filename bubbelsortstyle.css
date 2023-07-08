@@ -15,13 +15,16 @@
 
 .bubble_note{
     margin: 10px auto;
-    font-size: 14px;
+    font-size: 16px;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
+
 .number_label{
     margin-bottom: 20px;
-    font-family: 'pixelsixUpperC';
-    
+    color:#E5408D;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
+
 .input_number{
     margin-top: 20px;
     padding-left: 10px;
@@ -40,7 +43,7 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100%;
-    background-image: url('./Asset/wao.webp');
+    background-image: url('./Asset/nightsky.gif');
     background-color: black;
     background-size: cover;
     color: white;
@@ -198,7 +201,7 @@ ul{
     margin: 0px;
 }
 
-.less5, .greater11, .noInput, .invalid {
+.less5, .greater12, .noInput, .invalid {
     opacity: 0;
     display: none;
     transition: .2s ease-in-out;
@@ -212,7 +215,7 @@ ul{
     transform: translate(-50%, -50%);
 }
 
-.greater11, .invalid {
+.greater12, .invalid {
     padding: 120px 100px;
 }
 
@@ -334,17 +337,17 @@ ul{
 
 /* custom scrollbar */
 ::-webkit-scrollbar-track {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #1E1E1C;
+	background-color: #9900ff;
 }
 
 ::-webkit-scrollbar {
 	width: 6px;
-	background-color: #F5F5F5;
+	background-color: #9900ff;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #ff0077;
+	background-color: #04FF00;
+    border-radius: 15px;
 }
 
 
@@ -356,7 +359,7 @@ ul{
     .bubble_description {
         font-size: 22px;
         width: 70%;
-        text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+        text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
         display: block;
     }
 }
