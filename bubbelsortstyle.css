@@ -9,9 +9,8 @@
 
 .bubble_description{
     font-size: 16px;
-    width: 60%;
-    margin: 20px auto 40px auto;
-
+    width: 100%;
+    margin: 20px auto 0px auto;
 }
 
 .bubble_note{
