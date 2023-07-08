@@ -133,7 +133,7 @@ ul{
     justify-content: center;
     flex-direction: column;
     margin: 10px;
-    width: 1200px;
+    width: 90vw;
 }
 
 .numbersContainer {
@@ -190,8 +190,13 @@ ul{
 
 .nav-btns {
     padding-bottom: 30px;
-    display: flex;
+    display: flex;    
+    justify-content: center;
     gap: 35px;
+}
+
+#menubtn {
+    margin: 0px;
 }
 
 .less5, .greater11, .noInput, .invalid {
@@ -345,7 +350,6 @@ ul{
 
 
 @media screen and (min-width: 1280px) {
-    /* CSS rules go here */
     h1{
         font-size: 80px;
     }
@@ -353,5 +357,7 @@ ul{
     .bubble_description {
         font-size: 22px;
         width: 70%;
+        text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
+        display: block;
     }
-  }
+}
