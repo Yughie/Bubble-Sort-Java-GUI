@@ -201,9 +201,6 @@ function displayCurrentPass() {
     output.appendChild(document.createElement('br'));
   }
 
-  // Check if the last element is in its final position
-  output.innerHTML += '<p>Done with this pass. The last element processed is now in its final position: ' + numbers[numbers.length - currentPass - 1] + '</p>';
-
   // Create a list for the pass result (ex. PASS 1 RESULT: 5, 2, 12,13, 41)
   var passResult = document.createElement('ul');
   passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: ';
@@ -299,7 +296,6 @@ function nextPass() {
   }
 }
 
-
 // next button
 function nextPass() {
   if (currentPass < numbers.length - 2) {
@@ -319,5 +315,5 @@ function previousPass() {
     for (var pass = 0; pass <= currentPass; pass++) {
       displayCurrentPass(pass);
     }
-}
+  }  
 }
