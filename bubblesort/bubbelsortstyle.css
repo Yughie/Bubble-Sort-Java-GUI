@@ -28,11 +28,6 @@
     padding-left: 10px;
 }
 
-.initialAppear{
-    /*display: block;
-    opacity: 1;
-*/
-}
 .sortAppear{
     display: none;
     opacity: 0;
@@ -93,10 +88,6 @@ ul{
     display: flex;
 }
 
-.finaltxt {
-    display: block;
-}
-
 #output p, #output ul {
     font-family: pixelsixUpperC;
     font-size: 30px;
@@ -107,12 +98,21 @@ ul{
     font-size: 30px;
 }
 
+.finalResultNum .finaltxt {
+    display: block;
+}
+
 .passResultNum, .resultNum {
     font-size: 30px;
     color:#04FF00;
     animation: glow 2.5s linear infinite;
     list-style: none;
     padding-left: 15px;
+}
+
+.resultNum {
+    color:#00ffd5;
+    animation: finalGlow 2.5s linear infinite;
 }
 
 .comparisonNum {
@@ -150,6 +150,18 @@ ul{
     padding: 20px;
     width: 32px;
     text-align: center;
+}
+
+.finalPositionNumber {
+    font-size: 30px;
+    color:#00ffd5;
+    list-style: none;
+    padding-left: 15px;
+}
+
+.finalPosition {
+    color: #00ffd5;
+    animation: finalGlow 2.5s linear infinite;
 }
 
 .btn {
@@ -253,7 +265,6 @@ ul{
 }
 
 @keyframes glow {
-  
   0% {
     color: #04FF00;
     text-shadow: none;
@@ -285,6 +296,37 @@ ul{
   }
 }
 
+@keyframes finalGlow {
+    0% {
+      color: #00ffd5;
+      text-shadow: none;
+    }
+    
+    20% {
+      color: #00ffd5;
+      text-shadow: none;
+    }
+    
+    40% {
+      color: #00ffd5;
+      text-shadow: 0 0 10px #00ffd5, 0 0 35px #b6fff3, 0 0 70px #00ff80;
+    }
+    
+    60% {
+      color: #00ffd5;
+      text-shadow: none;
+    }
+    
+    80% {
+      color: #00ffd5;
+      text-shadow: none;
+    }
+    
+    100% {
+      color: #00ffd5;
+      text-shadow: none;
+    }
+  }
 
 /* custom scrollbar */
 ::-webkit-scrollbar-track {
@@ -300,7 +342,6 @@ ul{
 ::-webkit-scrollbar-thumb {
 	background-color: #ff0077;
 }
-
 
 
 @media screen and (min-width: 1280px) {
