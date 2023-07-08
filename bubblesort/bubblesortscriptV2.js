@@ -173,19 +173,7 @@ function displayCurrentPass() {
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is equal to <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
     }
 
-    numbersContainer.appendChild(numbersWrapper);
-    numbersContainer.appendChild(comparison);
-
-    output.appendChild(numbersContainer);
-    output.appendChild(document.createElement('br'));
-  }
-
-  currentPass++;
-
-  if (swapsMade && currentPass < numbers.length - 1) {
-    // Enable the next button to proceed to the next pass
-    document.getElementById('nxtbtn').disabled = false;
-  } else {
+    if (currentPass === numbers.length - 2) {
     var finalResultContainer = document.createElement('div');
     finalResultContainer.classList.add('finalResultNum');
 
@@ -195,15 +183,37 @@ function displayCurrentPass() {
 
     var finalResult = document.createElement('span');
     finalResult.classList.add('finalSorted');
-    finalResult.innerText = numbers.join(', ');
+
+    // Add each number as a span inside the final result element, set glow animation delay per span
+    numbers.forEach(function(number, index) {
+      var spanItem = document.createElement('span');
+      spanItem.classList.add('resultNum');
+      spanItem.textContent = number;
+
+      var animationDelay = (index + 1) * 0.2; // Increment delay by 0.2 seconds for each index
+      spanItem.style.animationDelay = animationDelay + 's';
+
+      finalResultTxt.appendChild(spanItem);
+
+      if (index !== numbers.length - 1) {
+        finalResultTxt.appendChild(document.createTextNode(', '));
+      }
+    });
 
     finalResultContainer.appendChild(finalResultTxt);
     finalResultContainer.appendChild(finalResult);
     output.appendChild(finalResultContainer);
-
-    // Disable the next button when sorting is completed
-    document.getElementById('nxtbtn').disabled = true;
   }
+    
+
+    numbersContainer.appendChild(numbersWrapper);
+    numbersContainer.appendChild(comparison);
+
+    output.appendChild(numbersContainer);
+    output.appendChild(document.createElement('br'));
+  }
+
+  currentPass++;
   }
 
 
