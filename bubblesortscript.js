@@ -20,15 +20,15 @@ function initialize() {
   // check if input is less than 5
   if (numbers.length < 5) {
     open5Alert(); // Show alert for less than 5 numbers
-    close11Alert(); // Hide alert for more than 11 numbers
+    close12Alert(); // Hide alert for more than 12 numbers
     closeInvalidAlert(); // Hide invalid input alert
     disablebtns(); // Disable back and next button
     return;
   }
 
-  // check if input is more than 11
-  if (numbers.length > 11) {
-    open11Alert(); // Show alert for more than 11 numbers
+  // check if input is more than 12
+  if (numbers.length > 12) {
+    open12Alert(); // Show alert for more than 12 numbers
     close5Alert(); // Hide alert for less than 5 numbers
     closeInvalidAlert(); // Hide invalid input alert
     disablebtns(); // Disable back and next button
@@ -47,7 +47,7 @@ function initialize() {
   currentPass = 0; // Reset current pass index
   clearOutput(); // Clear the output area
   close5Alert(); // Hide alert for less than 5 numbers
-  close11Alert(); // Hide alert for more than 11 numbers
+  close12Alert(); // Hide alert for more than 12 numbers
   closeInvalidAlert(); // Hide invalid input alert
   displayCurrentPass(); // Display the current pass
   appearbtns();
@@ -122,19 +122,19 @@ function close5Alert() {
   }, 200);
 }
 
-function open11Alert() {
-  var greater11 = document.getElementsByClassName('greater11')[0];
-  greater11.style.display = 'block';
+function open12Alert() {
+  var greater12 = document.getElementsByClassName('greater12')[0];
+  greater12.style.display = 'block';
   setTimeout(function() {
-    greater11.style.opacity = '1';
+    greater12.style.opacity = '1';
   }, 10);
 }
 
-function close11Alert() {
-  var greater11 = document.getElementsByClassName('greater11')[0];
-  greater11.style.opacity = '0';
+function close12Alert() {
+  var greater12 = document.getElementsByClassName('greater12')[0];
+  greater12.style.opacity = '0';
   setTimeout(function() {
-    greater11.style.display = 'none';
+    greater12.style.display = 'none';
   }, 200);
 }
 
