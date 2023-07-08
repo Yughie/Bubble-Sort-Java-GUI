@@ -137,9 +137,6 @@ function displayCurrentPass() {
 
   // Iterate over the numbers and display the comparison steps
   for (var j = 0; j < numbers.length - 1; j++) {
-
- 
-
     // Container for Bubble Array and sorting description text
     var numbersContainer = document.createElement('div');
     numbersContainer.classList.add('numbersContainer');
@@ -159,7 +156,7 @@ function displayCurrentPass() {
         // Set Bubble Number 1 ID
         number.id = 'comparison';
       }
-      
+
       // Bubble Number 2
       if (k === j + 1) {
         // Set Bubble Number 2 ID
@@ -181,22 +178,21 @@ function displayCurrentPass() {
       var temp = numbers[j]; // Store the current number (12) in a temporary variable
       numbers[j] = numbers[j + 1]; // Replace the current number (12) with the next number (5)
       numbers[j + 1] = temp; // Replace the next number (5) with the stored current number (12)
-      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j+1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
-      
-    /* ex. sorted 
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j + 1] + '</span> is greater than <span class="comparisonNum">' + numbers[j] + '</span>, <span class="swap">swap</span>';
+    }
+    /* ex. sorted
       (12 5) 2 41 13
       5 (12 2) 41 13
       5 2 (12 41) 13
       If the current number (12) is less than the next number (41), retain them in the same order */
-    } else if (numbers[j] < numbers[j + 1]) {
-      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j+1] + '</span>, <span class="retain">retain</span>';
-    
-      /* ex. (5 5) 12 2 41 13
+    else if (numbers[j] < numbers[j + 1]) {
+      comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is lesser than <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
+    }
+    /* ex. (5 5) 12 2 41 13
       If the current number (5) is equal to the next number (5), retain them in the same order */
-    } else {                                                              
+    else {
       comparison.innerHTML += '<span class="comparisonNum">' + numbers[j] + '</span> is equal to <span class="comparisonNum">' + numbers[j + 1] + '</span>, <span class="retain">retain</span>';
     }
-
 
     numbersContainer.appendChild(numbersWrapper);
     numbersContainer.appendChild(comparison);
@@ -205,25 +201,58 @@ function displayCurrentPass() {
     output.appendChild(document.createElement('br'));
   }
 
-  // Create a list for the pass result (ex. PASS 1 RESULT: 5, 2, 12, 13, 41)
-  var passResult = document.createElement('ul');
-  passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: '; 
+  // Check if the last element is in its final position
+  output.innerHTML += '<p>Done with this pass. The last element processed is now in its final position: ' + numbers[numbers.length - currentPass - 1] + '</p>';
 
+  // Create a list for the pass result (ex. PASS 1 RESULT: 5, 2, 12,13, 41)
+  var passResult = document.createElement('ul');
+  passResult.innerHTML = 'Pass ' + (currentPass + 1) + ' result: ';
+  
+  // Track the indexes of the final positions
+  var finalPositions = [];
+  
   // Add each number as a list item, set glow animation delay per list item
   numbers.forEach(function(number, index) {
     var li = document.createElement('li');
     li.classList.add('passResultNum');
+  
+    // Check if it is a final position
+    if (index >= numbers.length - currentPass - 1) {
+      li.classList.add('finalPosition');
+      finalPositions.push(index);
+    }
+    
     li.textContent = number;
-
+  
     var animationDelay = (index + 1) * 0.2; // Increment delay by 0.2 seconds for each index
     li.style.animationDelay = animationDelay + 's';
-
+  
     passResult.appendChild(li);
-
+  
     if (index !== numbers.length - 1) {
       passResult.appendChild(document.createTextNode(', '));
     }
   });
+  
+  // Display the final positions
+  if (finalPositions.length > 0) {
+    var finalPositionsText = 'Done with this pass. The last element';
+    if (finalPositions.length === 1) {
+      finalPositionsText += ' processed is now in its final position: ';
+    } else {
+      finalPositionsText += 's processed are now in their final positions: ';
+    }
+    
+    finalPositions.forEach(function(position, index) {
+      var number = numbers[position];
+      if (index > 0) {
+        finalPositionsText += ', ';
+      }
+      finalPositionsText += '<span class="finalPositionNumber">' + number + '</span>';
+      });
+  
+    output.innerHTML += '<p>' + finalPositionsText + '</p>';
+  }  
 
   output.appendChild(passResult);
   output.appendChild(document.createElement('br'));
@@ -241,7 +270,7 @@ function displayCurrentPass() {
     finalResult.classList.add('finalSorted');
 
     // Add each number as a span inside the final result element, set glow animation delay per span
-    numbers.forEach(function(number, index) {
+    numbers.forEach(function (number, index) {
       var spanItem = document.createElement('span');
       spanItem.classList.add('resultNum');
       spanItem.textContent = number;
@@ -264,13 +293,18 @@ function displayCurrentPass() {
 
 // next button
 function nextPass() {
-  if (currentPass < numbers.length -2) {
-    currentPass++;
-    displayCurrentPass(); 
-  } else if (currentPass === numbers.length - 2) {
+  if (currentPass < numbers.length - 2) {
     currentPass++;
     displayCurrentPass();
-    disablebtns(); // Disable back and next buttons after the final pass
+  }
+}
+
+
+// next button
+function nextPass() {
+  if (currentPass < numbers.length - 2) {
+    currentPass++;
+    displayCurrentPass(); 
   } 
 }
 
