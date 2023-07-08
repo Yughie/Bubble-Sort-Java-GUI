@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Sort</title>
+  <link rel="icon" type="tab-icon" href="Asset/bubble.png">
+  <link rel="stylesheet" href="bubbelsortstyle.css">
+  <script src="bubblesortscript.js"></script>
+</head>
+<body>
+  <div class="start">
+    <h1>Bubble Sort</h1>
+    <p class="bubble_description initialAppear" id="desc">Bubble sort is a basic sorting algorithm that works by repeatedly going through a list of numbers and comparing adjacent pairs. If a pair is out of order (e.g., the first number is greater than the second), it swaps them. This process is repeated until the entire list is sorted. It's called "bubble sort" because smaller numbers "bubble" or move towards the beginning of the list with each iteration. Although bubble sort is easy to understand and implement, it's not very efficient for large lists since it takes a long time to complete.
+    </p>
+    <form>
+      <label for="numbers" class="number_label initialAppear" >Enter numbers (comma-separated):</label>
+      <br>
+      <input class="input_number initialAppear" type="text" id="numbers" name="numbers" placeholder="ex. 12, 5, 2, 41, 13">
+    </form>
+    <p class="bubble_note">Note: Inputs should be a minimum of 5 and a maximum of 15 only.</p>
+    <button type="button" onclick="initialize()" class="btn initialAppear">Sort</button>
+  </div>
+  <div id="output"></div>
+
+  <div class="nav-btns" id="btns">
+    <button type="button" onclick="previousPass()" class="btn sortAppear" id="nxtbtn">Back</button>
+    <button type="button" onclick="nextPass()" class="btn sortAppear" id="prevbtn">Next</button>
+  </div>
+
+  <div class="nav-btns" id="menubtn">
+    <button type="button" onclick="openMenu()" class="btn sortAppear" id="menubtn">Main Menu</button>
+  </div>
+
+  <div class="less5">
+    Minimum of 5 inputs.
+    <button type="button" onclick="close5Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="greater12">
+    Maximum of 12 inputs only.
+    <button type="button" onclick="close12Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="noInput">
+    No input.
+    <button type="button" onclick="closeNoInput()" class="closebtn">OK</button>
+  </div>
+
+  <div class="invalid">
+    Numbers separated by commas<br>are the only allowed input.
+    <button type="button" onclick="closeInvalidAlert()" class="closebtn">OK</button>
+  </div>
+</body>
+</html>
