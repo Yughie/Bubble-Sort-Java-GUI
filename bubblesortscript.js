@@ -50,6 +50,38 @@ function initialize() {
   close11Alert(); // Hide alert for more than 11 numbers
   closeInvalidAlert(); // Hide invalid input alert
   displayCurrentPass(); // Display the current pass
+  appearbtns();
+  removedesc(); // remove description
+}
+// remove bubble sort description
+function removedesc() {
+  var desc = document.getElementById('desc');
+  desc.style.display = 'none';
+}
+
+function appeardesc() {
+  var desc = document.getElementById('desc');
+  desc.style.display = 'block';
+}
+
+function openMenu() {
+  clearOutput();
+  appeardesc();
+  removebtns();
+}
+
+function removebtns() {
+  var btns = document.getElementById('btns');
+  var menubtn = document.getElementById('menubtn');
+  btns.style.display = 'none';
+  menubtn.style.display = 'none';
+}
+
+function appearbtns() {
+  var btns = document.getElementById('btns');
+  var menubtn = document.getElementById('menubtn');
+  btns.style.display = 'flex';
+  menubtn.style.display = 'flex';
 }
 
 // disabling back and next button
