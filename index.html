@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bubble Sort</title>
+  <link rel="icon" type="tab-icon" href="Asset/bubble.png">
+  <link rel="stylesheet" href="bubbelsortstyle.css">
+  <script src="bubblesortscript.js"></script>
+</head>
+<body>
+  <div class="start">
+    <h1>Bubble Sort</h1>
+    <p class="bubble_description initialAppear">Bubble sort compares adjacent elements in a list, swapping them if needed to "bubble" smaller elements to the top. It repeats this process until the list is sorted. Though easy to understand, it can be inefficient for large lists due to its O(n^2) time complexity.
+    </p>
+    <form>
+      <label for="numbers" class="number_label initialAppear" >Enter numbers (comma-separated):</label>
+      <br>
+      <input class="input_number initialAppear" type="text" id="numbers" name="numbers" placeholder="ex. 12, 5, 2, 41, 13">
+    </form>
+    <p class="bubble_note">Note: Inputs should be a minimum of 5 and a maximum of 11 only.</p>
+    <button type="button" onclick="initialize()" class="btn initialAppear">Sort</button>
+  </div>
+  <div id="output"></div>
+
+  <div class="nav-btns">
+    <button type="button" onclick="previousPass()" class="btn sortAppear" id="nxtbtn">Back</button>
+    <button type="button" onclick="nextPass()" class="btn sortAppear" id="prevbtn">Next</button>
+  </div>
+
+  <div class="less5">
+    Minimum of 5 inputs.
+    <button type="button" onclick="close5Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="greater11">
+    Maximum of 11 inputs only.
+    <button type="button" onclick="close11Alert()" class="closebtn">OK</button>
+  </div>
+
+  <div class="noInput">
+    No input.
+    <button type="button" onclick="closeNoInput()" class="closebtn">OK</button>
+  </div>
+
+  <div class="invalid">
+    Numbers separated by commas<br>are the only allowed input.
+    <button type="button" onclick="closeInvalidAlert()" class="closebtn">OK</button>
+  </div>
+</body>
+</html>
